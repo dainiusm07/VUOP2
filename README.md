@@ -131,3 +131,7 @@ Kuri jau saugo specifinius, studentui budingus, duomenis. T.y. galutinius balus.
 ```C++
 class Studentas : public Zmogus
 ```
+## v2
+Prideta **doxygen** dokumentacija.
+
+Beje doxygen naudojimas pasirodo labai paprastas uztenka tik parasyti `doxygen -g main.cpp` ir poto `doxygen main.cpp` ir dokumentacija jau paruosta.
