@@ -135,3 +135,72 @@ class Studentas : public Zmogus
 Prideta **doxygen** dokumentacija.
 
 Beje doxygen naudojimas pasirodo labai paprastas uztenka tik parasyti `doxygen -g main.cpp` ir poto `doxygen main.cpp` ir dokumentacija jau paruosta.
+
+Atlikti testavimai naudojant **Catch2 frameworka**. Norint padaryti savo testa uztenka tik pasikeisti testus `unit_test.cpp` faile. Ir parasyti i komandine eilute `make unit_test` ir tada tiesiog paleisti programa (defaultiniu pavadinimu) `test`.
+
+_Unit testai:_
+
+```C++
+TEST_CASE("Tikrina ar visos raides")
+{
+	CHECK(isLetters("Dainius"));                                //ok
+	CHECK(isLetters("99g"));                                    //neok
+	CHECK_FALSE(isLetters("565gfdhdfg5"));                      //ok
+}
+
+TEST_CASE("Tikrina ar kelia kvadratu teisingai")
+{
+	CHECK(involution(5,3) == 125);                            //ok
+	CHECK(involution(2,6) == 65);                             //neok  
+	CHECK_FALSE(involution(6,0) == 1);                        //neok
+}
+
+TEST_CASE("Tikrina vidurki ir mediana")
+{
+	std::vector<int> v1(10, 5);
+	CHECK(average(v1) == 5);                                  //ok
+	std::vector<int> v2{1 ,2 ,3 ,4 ,5 ,6 ,7 ,8 ,9 };
+	CHECK(median(v2) == 5);                                  //ok
+}
+```
+
+_Rezultatai tokie kokiu ir buvo tiketasi:_
+
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+test is a Catch v2.7.2 host application.
+Run with -? for options
+
+-------------------------------------------------------------------------------
+Tikrina ar visos raides
+-------------------------------------------------------------------------------
+unit_test.cpp:5
+...............................................................................
+
+unit_test.cpp:8: FAILED:
+  CHECK( isLetters("99g") )
+with expansion:
+  false
+
+-------------------------------------------------------------------------------
+Tikrina ar kelia kvadratu teisingai
+-------------------------------------------------------------------------------
+unit_test.cpp:12
+...............................................................................
+
+unit_test.cpp:15: FAILED:
+  CHECK( involution(2,6) == 65 )
+with expansion:
+  64 == 65
+
+unit_test.cpp:16: FAILED:
+  CHECK_FALSE( involution(6,0) == 1 )
+with expansion:
+  !(1 == 1)
+
+===============================================================================
+test cases: 3 | 1 passed | 2 failed
+assertions: 8 | 5 passed | 3 failed
+```
+
+
